@@ -20,16 +20,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-static_dir = os.path.join(os.path.dirname(__file__), "static")
-if os.path.isdir(static_dir):
-    app.mount(
-        "/", 
-        StaticFiles(directory=static_dir, html=True), 
-        name="static"
-    )
-else:
-    logger.warning(f"Static directory not found at {static_dir!r}, frontend will not be served.")
-
 BASE_DIR = os.path.dirname(__file__)
 TEMP_DIR = os.path.join(BASE_DIR, "temp")
 os.makedirs(TEMP_DIR, exist_ok=True)
@@ -173,6 +163,17 @@ def download_zip(session: str):
     logger.info(f"Serving zip: {zip_path!r}")
     return FileResponse(zip_path, media_type="application/zip", filename=f"{session}.zip")
 
+
+static_dir = os.path.join(os.path.dirname(__file__), "static")
+if os.path.isdir(static_dir):
+    app.mount(
+        "/", 
+        StaticFiles(directory=static_dir, html=True), 
+        name="static"
+    )
+else:
+    logger.warning(f"Static directory not found at {static_dir!r}, frontend will not be served.")
+    
 
 if __name__ == "__main__":
     import uvicorn
