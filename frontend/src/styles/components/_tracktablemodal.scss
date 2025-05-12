@@ -1,0 +1,97 @@
+@use 'sass:color';
+@use '../variables' as *;
+
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.2s ease;
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+// Modal card
+.modal-card {
+  background: white;
+  border-radius: $radius;
+  box-shadow: 0 4px 16px rgba($text, 0.2);
+  width: auto;    
+  max-width: none; 
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: $gap;
+  // replace deprecated lighten()
+  border-bottom: 1px solid color.scale($text, $lightness: 80%);
+}
+
+.modal-body {
+  padding: $gap;
+}
+
+// Clear button in form header
+.upload-form {
+  .form-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: $gap;
+    h2 {
+      margin: 0;
+    }
+    .clear-btn {
+      background: transparent;
+      border: none;
+      font-size: 1.2rem;
+      cursor: pointer;
+      color: $text;
+      transition: color 0.2s;
+      &:hover {
+        color: $primary;
+      }
+    }
+  }
+}
+
+// Show Tracks button
+.show-tracks-btn {
+  background: $secondary;
+  color: $primary;
+  border: 1px solid $primary;
+  border-radius: $radius;
+  padding: 0.5 * $gap 1 * $gap;
+  cursor: pointer;
+  transition: background 0.2s;
+  &:hover {
+    background: $primary;
+    color: white;
+  }
+}
+
+// Modal close button
+.close-btn {
+  background: transparent;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: $text;
+  transition: color 0.2s;
+  &:hover {
+    color: $primary;
+  }
+}

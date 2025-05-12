@@ -1,0 +1,41 @@
+@use '../variables' as *;
+
+.upload-form {
+  background: white;
+  padding: 2*$gap;
+  border-radius: $radius;
+  box-shadow: 0 2px 8px rgba($text, 0.1);
+  max-width: 600px;
+  margin: 0 auto 2*$gap;
+
+  label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 0.5*$gap;
+  }
+
+  .file-input {
+    display: block;
+    margin-bottom: $gap;
+  }
+
+  textarea {
+    min-height: 120px;
+  }
+
+  button {
+    display: block;
+    margin-top: $gap;
+    width: 100%;
+  }
+
+  .form-actions {
+    display: flex;
+    gap: $gap;
+    margin-top: $gap;
+
+    button {
+      flex: 1;
+    }
+  }
+}

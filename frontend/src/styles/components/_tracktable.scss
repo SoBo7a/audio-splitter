@@ -1,0 +1,83 @@
+@use 'sass:color';
+@use '../variables' as *;
+
+.track-table {
+  background: white;
+  padding: 2 * $gap;
+  border-radius: $radius;
+  box-shadow: 0 2px 8px rgba($text, 0.1);
+  width: 100%;
+  margin: 0 auto 2 * $gap;
+
+  .table-wrapper {
+    overflow-x: auto;
+  }
+
+  table {
+    width: 100%;
+    min-width: 600px;
+    border-collapse: collapse;
+  }
+
+  th, td {
+    padding: calc($gap / 2);
+    text-align: left;
+    // replace deprecated lighten($text, 80%)
+    border-bottom: 1px solid color.scale($text, $lightness: 80%);
+  }
+
+  th {
+    background: $primary;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.875rem;
+  }
+
+  .select-cell {
+    width: 3rem;
+  }
+
+  .waveform-cell {
+    width: 220px;
+  }
+
+  .title-cell {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    .track-number {
+      font-weight: bold;
+      margin-right: calc($gap / 2);
+    }
+  }
+
+  .actions {
+    a {
+      margin-right: 0.5 * $gap;
+      color: $primary;
+      text-decoration: none;
+      font-weight: 500;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .download-selected {
+    margin-top: $gap;
+    padding: calc($gap / 2);
+    background: $primary;
+    color: white;
+    border: none;
+    border-radius: calc($radius / 2);
+    cursor: pointer;
+
+    &:disabled {
+      // replace deprecated lighten($primary, 20%)
+      background: color.scale($primary, $lightness: 20%);
+      cursor: not-allowed;
+    }
+  }
+}
