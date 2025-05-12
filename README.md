@@ -68,20 +68,15 @@ uvicorn main:app --reload --host 0.0.0.0 --port 8000
 ```
 
 ### 2. Run the frontend
+Create the frontend/.env file with the following content (change port if needed...):
+```conf
+VUE_APP_BACKEND_URL=http://localhost:8000
+```
 
 From `/frontend`:
 ```bash
 npm run serve   # starts at http://localhost:8080 by default
 ```
-
-> **Tip:** set the `backend` URL in `frontend/.env` if your API runs on a different host/port.
-
----
-
-## 🛠️ Configuration
-
-- **`backend/requirements.txt`** lists Python dependencies.
-- **`frontend/vue.config.js`** (optional) adjust dev server proxy.
 
 ---
 
@@ -89,44 +84,12 @@ npm run serve   # starts at http://localhost:8080 by default
 
 All endpoints under `/api`.
 
-| Method | Path                       | Description                                      |
-| ------ | -------------------------- | ------------------------------------------------ |
-| POST   | `/api/split`               | Upload files & split → JSON with session/tracks. |
-| GET    | `/api/download/{session}/{file}` | Download a single track or cover.             |
-| GET    | `/api/download_zip/{session}`   | ZIP of all tracks (and cover).               |
+| Method | Path                             | Description                                      |
+| ------ | -------------------------------- | ------------------------------------------------ |
+| POST   | `/api/split`                     | Upload files & split → JSON with session/tracks. |
+| GET    | `/api/download/{session}/{file}` | Download a single track or cover.                |
+| GET    | `/api/download_zip/{session}`    | ZIP of all tracks (and cover).                   |
 
----
-
-## 📂 Project Structure
-
-```
-.
-├── backend/
-│   ├── main.py
-│   ├── track_splitter.py
-│   ├── logger.py
-│   ├── requirements.txt
-│   └── temp/
-├── frontend/
-│   ├── public/
-│   ├── src/
-│   │   ├── components/
-│   │   ├── styles/
-│   │   └── main.js
-│   ├── package.json
-│   └── vue.config.js
-└── README.md
-```
-
----
-
-## 🤝 Contributing
-
-1. Fork & create a feature branch:  
-   `git checkout -b feat/your-feature`  
-2. Commit & push:  
-   `git commit -am 'Add feature' && git push origin feat/your-feature`  
-3. Open a PR describing your changes.
 
 ---
 
