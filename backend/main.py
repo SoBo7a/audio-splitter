@@ -27,6 +27,8 @@ if os.path.isdir(static_dir):
         StaticFiles(directory=static_dir, html=True), 
         name="static"
     )
+else:
+    logger.warning(f"Static directory not found at {static_dir!r}, frontend will not be served.")
 
 BASE_DIR = os.path.dirname(__file__)
 TEMP_DIR = os.path.join(BASE_DIR, "temp")
