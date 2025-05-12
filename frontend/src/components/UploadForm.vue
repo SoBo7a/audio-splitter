@@ -146,11 +146,14 @@ export default {
       form.append('tracklist', this.tracklist)
 
       try {
-        const res = await axios.post(`${this.$backend}/api/split`, form)
+        const res = await axios.post(`/api/split`, form)
+        // Use below for development
+        // const res = await axios.post(`${this.$backend}/api/split`, form)
         this.submitted = true
         this.$emit('split-complete', {
           tracks:  res.data.tracks,
           session: res.data.session,
+          artist:  res.data.artist,
           album:   res.data.album,
           cover:   res.data.cover,
           year:    res.data.year

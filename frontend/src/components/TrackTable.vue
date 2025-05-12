@@ -13,7 +13,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(t,i) in tracks" :key="i">
+          <tr v-for="(t, i) in tracks" :key="i">
             <!-- 1) Select checkbox -->
             <td class="select-cell">
               <input type="checkbox" :value="i" v-model="selected" />
@@ -21,17 +21,29 @@
 
             <!-- 2) Waveform preview -->
             <td class="waveform-cell">
-              <WaveformPlayer :url="$backend + t.path" />
+              <!-- Use relative path: -->
+              <WaveformPlayer :url="t.path" />
+              <!-- Use below for development -->
+              <!-- <WaveformPlayer :url="$backend + t.path" /> -->
             </td>
 
             <!-- 3) Track number + title -->
             <td class="title-cell">
-              <span class="track-number">{{ i+1 }}.</span>
+              <span class="track-number">{{ i + 1 }}.</span>
               <span class="track-title">{{ t.title }}</span>
             </td>
 
-            <!-- 4) Download link uses the real filename from the URL -->
+            <!-- 4) Download link -->
             <td class="actions">
+              <a
+                :href="t.path"
+                :download="filenameFromPath(t.path)"
+                target="_blank"
+              >
+                Download
+              </a>
+              <!-- Use below for development -->
+              <!--
               <a
                 :href="$backend + t.path"
                 :download="filenameFromPath(t.path)"
@@ -39,6 +51,7 @@
               >
                 Download
               </a>
+              -->
             </td>
           </tr>
         </tbody>
@@ -66,7 +79,7 @@ export default {
   props: {
     tracks: Array,
     album: String,
-    cover: String,    // e.g. "/api/download/<session>/cover.jpg"
+    cover: String, // e.g. "/api/download/<session>/cover.jpg"
   },
   data() {
     return {
@@ -100,10 +113,14 @@ export default {
       // include cover first
       if (this.cover) {
         try {
-          const resp = await fetch(this.$backend + this.cover)
+          // use relative cover URL
+          let coverUrl = this.cover
+          // Use below for development
+          // let coverUrl = this.$backend + this.cover
+
+          const resp = await fetch(coverUrl)
           if (resp.ok) {
             const blob = await resp.blob()
-            // use the actual cover filename
             const coverName = this.filenameFromPath(this.cover)
             folder.file(coverName, blob)
           }
@@ -112,10 +129,13 @@ export default {
         }
       }
 
-      // then the selected tracks, using their real filenames
+      // then the selected tracks, using relative URLs
       for (const idx of this.selected) {
-        const t   = this.tracks[idx]
-        const url = `${this.$backend}${t.path}`
+        const t = this.tracks[idx]
+        let url = t.path
+        // Use below for development
+        // let url = this.$backend + t.path
+
         const resp = await fetch(url)
         if (!resp.ok) {
           console.error('Fetch failed', url, resp.status)
@@ -141,9 +161,6 @@ export default {
   }
   .waveform-cell {
     min-width: 200px;
-  }
-  .title-cell {
-    /* flex or padding as you like */
   }
   .actions a {
     margin-right: 0.5rem;

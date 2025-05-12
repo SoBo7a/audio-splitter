@@ -9,13 +9,12 @@
         ref="uploadForm"
         :has-tracks="tracks.length > 0"
       />
-
-      <!-- this button is now moved into the form itself -->
     </div>
 
     <TrackTableModal
       v-model:visible="modalVisible"
       :tracks="tracks"
+      :artist="artist"
       :album="album"
       :cover="cover"
     />
@@ -30,6 +29,7 @@ export default {
   components: { UploadForm, TrackTableModal },
   data() {
     return {
+      artist: '',
       tracks: [],
       album: '',
       session: '',
@@ -41,6 +41,7 @@ export default {
     handleSplit({ tracks, session, album, cover }) {
       this.tracks = tracks
       this.session = session
+      this.artist  = artist
       this.album = album
       this.cover = cover
       this.modalVisible = true      // auto‐open on split

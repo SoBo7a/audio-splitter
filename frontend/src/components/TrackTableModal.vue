@@ -10,6 +10,7 @@
         <div class="modal-body">
           <TrackTable
             :tracks="tracks"
+            :artist="artist"
             :album="album"
             :cover="cover"
           />
@@ -28,8 +29,9 @@ export default {
   props: {
     visible: Boolean,
     tracks: Array,
+    artist: String,
     album: String,
-    cover: String,     // ← new prop
+    cover: String,
   },
   emits: ['update:visible'],
   methods: {
