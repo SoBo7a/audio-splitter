@@ -32,10 +32,10 @@ async def on_startup():
 @app.middleware("http")
 async def log_requests(request: Request, call_next):
     start = time.time()
-    logger.info(f"→ {request.method} {request.url.path}")
+    logger.info(f"-> {request.method} {request.url.path}")
     response = await call_next(request)
     duration = (time.time() - start) * 1000
-    logger.info(f"← {request.method} {request.url.path} completed in {duration:.1f}ms "
+    logger.info(f"<- {request.method} {request.url.path} completed in {duration:.1f}ms "
                 f"status={response.status_code}")
     return response
 
