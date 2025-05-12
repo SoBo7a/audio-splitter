@@ -77,6 +77,10 @@ export default {
   name: 'TrackTable',
   components: { WaveformPlayer },
   props: {
+    artist: {
+      type: String,
+      default: ''
+    },
     tracks: Array,
     album: String,
     cover: String, // e.g. "/api/download/<session>/cover.jpg"
@@ -108,7 +112,11 @@ export default {
       if (!this.selected.length) return
 
       const zip = new JSZip()
-      const folder = zip.folder(this.album || 'tracks')
+      // Build the folder name as "Artist – Album" if artist given, else just album or "tracks"
+      const folderName = this.artist
+        ? `${this.artist} - ${this.album || 'tracks'}`
+        : (this.album || 'tracks')
+      const folder = zip.folder(folderName)
 
       // include cover first
       if (this.cover) {
@@ -147,7 +155,7 @@ export default {
       }
 
       const content = await zip.generateAsync({ type: 'blob' })
-      saveAs(content, `${this.album || 'tracks'}.zip`)
+      saveAs(content, `${folderName}.zip`)
     }
   }
 }

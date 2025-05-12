@@ -3,7 +3,9 @@
     <div v-if="visible" class="modal-overlay" @click.self="close">
       <div class="modal-card">
         <header class="modal-header">
-          <h2>{{ album }} - Tracks</h2>
+          <h2>
+            {{ artist ? `${artist} - ${album}` : `${album} - Tracks` }}
+          </h2>
           <button class="close-btn" @click="close">✕</button>
         </header>
 

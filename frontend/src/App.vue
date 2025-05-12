@@ -38,10 +38,10 @@ export default {
     }
   },
   methods: {
-    handleSplit({ tracks, session, album, cover }) {
+    handleSplit({ tracks, session, album, cover, artist }) {
       this.tracks = tracks
       this.session = session
-      this.artist  = artist
+      this.artist = artist
       this.album = album
       this.cover = cover
       this.modalVisible = true      // auto‐open on split

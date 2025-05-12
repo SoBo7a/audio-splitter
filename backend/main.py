@@ -134,6 +134,8 @@ async def split(
         })
 
     response = {"session": session_id, "tracks": track_objs}
+    if artist:
+        response["artist"] = artist
     if album:
         response["album"] = album
     if cover and cover_path:
