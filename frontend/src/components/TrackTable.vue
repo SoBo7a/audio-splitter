@@ -21,7 +21,7 @@
 
             <!-- 2) Waveform preview -->
             <td class="waveform-cell">
-              <WaveformPlayer :url="backend + t.path" />
+              <WaveformPlayer :url="$backend + t.path" />
             </td>
 
             <!-- 3) Track number + title -->
@@ -33,7 +33,7 @@
             <!-- 4) Download link uses the real filename from the URL -->
             <td class="actions">
               <a
-                :href="backend + t.path"
+                :href="$backend + t.path"
                 :download="filenameFromPath(t.path)"
                 target="_blank"
               >
@@ -67,10 +67,6 @@ export default {
     tracks: Array,
     album: String,
     cover: String,    // e.g. "/api/download/<session>/cover.jpg"
-    backend: {
-      type: String,
-      default: 'http://localhost:8000'
-    }
   },
   data() {
     return {
@@ -104,7 +100,7 @@ export default {
       // include cover first
       if (this.cover) {
         try {
-          const resp = await fetch(this.backend + this.cover)
+          const resp = await fetch(this.$backend + this.cover)
           if (resp.ok) {
             const blob = await resp.blob()
             // use the actual cover filename
@@ -119,7 +115,7 @@ export default {
       // then the selected tracks, using their real filenames
       for (const idx of this.selected) {
         const t   = this.tracks[idx]
-        const url = `${this.backend}${t.path}`
+        const url = `${this.$backend}${t.path}`
         const resp = await fetch(url)
         if (!resp.ok) {
           console.error('Fetch failed', url, resp.status)

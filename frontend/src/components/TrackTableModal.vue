@@ -12,7 +12,6 @@
             :tracks="tracks"
             :album="album"
             :cover="cover"
-            :backend="backend"
           />
         </div>
       </div>
@@ -31,10 +30,6 @@ export default {
     tracks: Array,
     album: String,
     cover: String,     // ← new prop
-    backend: {
-      type: String,
-      default: 'http://localhost:8000'
-    }
   },
   emits: ['update:visible'],
   methods: {

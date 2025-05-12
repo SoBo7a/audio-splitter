@@ -18,7 +18,6 @@
       :tracks="tracks"
       :album="album"
       :cover="cover"
-      :backend="backend"
     />
   </div>
 </template>
@@ -35,7 +34,6 @@ export default {
       album: '',
       session: '',
       cover: null,
-      backend: 'http://localhost:8000',
       modalVisible: false
     }
   },

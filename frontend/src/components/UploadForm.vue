@@ -6,8 +6,8 @@
       :is-full-page="true"
       color="#4f46e5"
       loader="dots"
-      width="64"
-      height="64"
+      :width="64"
+      :height="64"
       background-color="rgba(255,255,255,0.7)"
     />
 
@@ -146,7 +146,7 @@ export default {
       form.append('tracklist', this.tracklist)
 
       try {
-        const res = await axios.post('http://localhost:8000/api/split', form)
+        const res = await axios.post(`${this.$backend}/api/split`, form)
         this.submitted = true
         this.$emit('split-complete', {
           tracks:  res.data.tracks,
