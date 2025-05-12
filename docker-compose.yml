@@ -1,0 +1,12 @@
+services:
+  audio-splitter:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: audio-splitter:latest
+    container_name: audio-splitter
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./test-logs:/app/logs
+    restart: unless-stopped
