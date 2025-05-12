@@ -8,5 +8,5 @@ services:
     ports:
       - "8000:8000"
     volumes:
-      - ./test-logs:/app/logs
+      - ./logs:/app/logs
     restart: unless-stopped
